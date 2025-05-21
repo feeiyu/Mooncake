@@ -109,3 +109,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: Mooncake/mooncake-wheel/dist-release/*.whl
+          name: ${{ inputs.ref }}
+          tag_name: ${{ inputs.ref }}
+          body: ${{ inputs.ref }}
+          draft: false
+          prerelease: true
