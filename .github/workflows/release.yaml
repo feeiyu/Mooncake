@@ -4,7 +4,12 @@ on:
   push:
     tags:
       - 'v*'
-
+  workflow_call:
+    inputs:
+      ref:
+        description: Branch/tag/ref to build
+        type: string
+        required: true
 env:
   SCCACHE_GHA_ENABLED: "true"
 jobs:
@@ -18,7 +23,9 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
-
+        with:
+          ref: ${{ inputs.ref }}
+          
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
